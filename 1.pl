@@ -48,5 +48,11 @@ parent(duhovlad,zlatomir).
 parent(zhdana,zdislava).
 parent(zhdana,zlatomir).
 
+% 4 вариант
+% 11 задание
 father(X,Y):-man(X),parent(X,Y),!.
 father(X):-father(Y,X),write(Y),nl,!.
+% 12 задание
+wife(X,Y):-woman(X),parent(X,Z),parent(Y,Z),!.
+wife(X):-wife(Y,X),write(Y),nl,!.
+
