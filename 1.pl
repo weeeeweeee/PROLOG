@@ -72,3 +72,8 @@ nummult_up(X,Y):- X>=10,K is (X div 10),nummult_up(K,Z),Y is (X mod 10) * Z,!.
 nummult_impl(X,Y,W):-X<10,N is (X mod 10), Z is (Y * N), W is Z,!.
 nummult_impl(X,Y,W):-X>=10,N is (X div 10), Z is (Y * (X mod 10)),nummult_impl(N, Z, W),!.
 nummult_down(X,Y):-nummult_impl(X,1,Y),!.
+
+% 17 задание
+max3_up(X,Y):-X<10,((N is X mod 3,N =:= 0, Y is X); Y is -1),!.
+max3_up(X,Y):-X>=10,N is X div 10,max3_up(N,Z),M is X mod 10,((M mod 3 =:= 0,((M > Z, Y is M);Y is Z));Y is Z),!.
+
