@@ -52,16 +52,23 @@ parent(zhdana,zlatomir).
 % 11 задание
 father(X,Y):-man(X),parent(X,Y),!.
 father(X):-father(Y,X),write(Y),nl,!.
+
 % 12 задание
 wife(X,Y):-woman(X),parent(X,Z),parent(Y,Z),!.
 wife(X):-wife(Y,X),write(Y),nl,!.
+
 % 13 задание
 grand_ma(X,Y):-woman(X),parent(X, Z),parent(Z,Y),!.
 grand_mas(X):-grand_ma(Y,X),write(Y),nl,fail.
+
 % 14 задание
 grand_ma_and_son(X,Y):-man(Y),grand_ma(X,Y),!;man(X),grand_ma(Y,X),!.
-% 15 задание
-nummult(integer,integer).
-nummult(X,Y):- X<10,Y := (X mod 10).
-nummult(X,Y):- X = (X div 10),nummult(X,Z),Y=Z.
 
+% 15 задание
+nummult_up(X,Y):- X<10,Y is (X mod 10),!.
+nummult_up(X,Y):- X>=10,K is (X div 10),nummult_up(K,Z),Y is (X mod 10) * Z,!.
+
+% 16 задание
+nummult_impl(X,Y,W):-X<10,N is (X mod 10), Z is (Y * N), W is Z,!.
+nummult_impl(X,Y,W):-X>=10,N is (X div 10), Z is (Y * (X mod 10)),nummult_impl(N, Z, W),!.
+nummult_down(X,Y):-nummult_impl(X,1,Y),!.
