@@ -77,3 +77,10 @@ nummult_down(X,Y):-nummult_impl(X,1,Y),!.
 max3_up(X,Y):-X<10,((N is X mod 3,N =:= 0, Y is X); Y is -1),!.
 max3_up(X,Y):-X>=10,N is X div 10,max3_up(N,Z),M is X mod 10,((M mod 3 =:= 0,((M > Z, Y is M);Y is Z));Y is Z),!.
 
+% 18 задание
+max3_impl(X,Y,Z):-X<10,N is X mod 3,(N =:= 0,(X > Y,Z is X;Z is Y);Z is Y),!.
+max3_impl(X,Y,Z):-X>=10,M is (X mod 10),((M mod 3) =:= 0,(M > Y, K is M;K is Y);K is Y),N is (X div 10),max3_impl(N,K,Z),!.
+max3_down(X,Y):-max3_impl(X,-1,Y),!.
+
+% 19 задание
+
