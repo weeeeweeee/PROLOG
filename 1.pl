@@ -1,4 +1,4 @@
-man(voeneg).
+bman(voeneg).
 man(ratibor).
 man(boguslav).
 man(velerad).
@@ -83,4 +83,5 @@ max3_impl(X,Y,Z):-X>=10,M is (X mod 10),((M mod 3) =:= 0,(M > Y, K is M;K is Y);
 max3_down(X,Y):-max3_impl(X,-1,Y),!.
 
 % 19 задание
-
+fib(N,X):-N=<2,X is 1,!.
+fib(N,X):-N>2, fib(N-1,F),fib(N-2,E),X is F+E,!.
