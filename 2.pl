@@ -1,3 +1,6 @@
+append([],X,X).
+append([H|T],X,[H|T1]):-append(T,X,T1).
+
 % 4 вариант
 nod(A,0,A):-!.
 nod(A,B,X):-C is A mod B,nod(B,C,X),!.
@@ -53,19 +56,52 @@ polynom(B,C,M,PR,V):-THS is 1000,count(B,C,M1),(M1 > M,(MAX is M1,NPR is B*C);MA
 find(V):-polynom(-999,-999,0,0,V).
 
 % 14 задание
+% Найти длину списка
 len([],C,V):-V is C.
 len([_|T],C,V):-inc(C,C1),len(T,C1,V).
 len([H|T],V):-len([H|T],0,V).
 
 % 15 задание (1.3)
+% Найти максимальный элемент
 find_max([],M,V):-V is M.
 find_max([H|T],M,V):-(H>M,MAX is H;MAX is M),find_max(T,MAX,V).
 find_max([H|T],V):-find_max(T,H,V),!.
 
+% Найти элемент по его индексу
 find_ind([],_,_,_):- false.
 find_ind([H|T],C,N,V):-C is N,V is H;inc(N,N1),find_ind(T,C,N1,V).
 find_ind([H|T],C,V):-find_ind([H|T],C,0,V),!.
 
+% Проверить равенство элемента по индексу C элементу M
 check_ind([H|T],C,M):-find_ind([H|T],C,M1),M is M1.
 
+% Проверить, является ли элемент по индексу N максимальным
 check_max([H|T],N):-find_max([H|T],MAX),check_ind([H|T],N,MAX).
+
+
+
+% 16 задание (1.4)
+% найти индекс максимального элемента
+find_ind_max([],_,MC,_,MC).
+find_ind_max([H|T],M,MC,IND,V):-(H>M,MAX is H,MAXC is IND;MAX is M, MAXC is MC),inc(IND,IND1),find_ind_max(T,MAX,MAXC,IND1,V).
+find_ind_max([H|T],V):-find_ind_max(T,H,0,1,V),!.
+
+% удаление элемента по индексу
+del([],_,_,_).
+del([_|T],C,C,T).
+del([H|T],IND,C,[H|L]):-inc(IND,IND1),del(T,IND1,C,L),!.
+del([H|T],C,A):-del([H|T],0,C,A).
+
+% отсортировать список по убыванию
+sorted([],_):-!.
+sorted([H|T],[L|T1]):-find_max([H|T],L),find_ind_max([H|T],M),del([H|T],M,NL),sorted(NL,T1),!.
+
+% найти индекс элемента
+find_el([],_,_,A):-A is -1,false.
+find_el([H|T],IND,EL,A):-EL is H,A is IND,true;inc(IND,IND1),find_el(T,IND1,EL,A).
+find_el([H|T],EL,A):-find_el([H|T],0,EL,A),!.
+
+% найти список индексов элементов, образующих убывающую последовательность
+sorted_ind([],_,_).
+sorted_ind([H|T],LST,[H1|T1]):-find_el(LST,H,H1),sorted_ind(T,LST,T1).
+sorted_ind(LIST,OUTPUT):-sorted(LIST,SCND),sorted_ind(SCND,LIST,OUT),len(LIST,L)!.
