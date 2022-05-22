@@ -57,4 +57,15 @@ len([],C,V):-V is C.
 len([_|T],C,V):-inc(C,C1),len(T,C1,V).
 len([H|T],V):-len([H|T],0,V).
 
-% 
+% 15 задание (1.3)
+find_max([],M,V):-V is M.
+find_max([H|T],M,V):-(H>M,MAX is H;MAX is M),find_max(T,MAX,V).
+find_max([H|T],V):-find_max(T,H,V),!.
+
+find_ind([],_,_,_):- false.
+find_ind([H|T],C,N,V):-C is N,V is H;inc(N,N1),find_ind(T,C,N1,V).
+find_ind([H|T],C,V):-find_ind([H|T],C,0,V),!.
+
+check_ind([H|T],C,M):-find_ind([H|T],C,M1),M is M1.
+
+check_max([H|T],N):-find_max([H|T],MAX),check_ind([H|T],N,MAX).
