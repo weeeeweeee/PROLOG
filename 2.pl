@@ -117,3 +117,9 @@ find_in_interval([H|T],A,B,I,OUT):-(A<I,B>I),OUT is H;inc(I,I1),find_in_interval
 find_in_interval(LST,A,B,OUT):-(A>B,A1 is B, B1 is A;A1 is A,B1 is B),find_in_interval(LST,A1,B1,0,OUT).
 
 between_two_max(LST,OUT):-find_max(LST,MAX1),second_max(LST,MAX2),find_el(LST,MAX1,IND1),find_el(LST,MAX2,IND2),find_in_interval(LST,IND1,IND2,OUT).
+
+% 19 задание (1.25)
+find_int_MAX([],_,_,_,V,V).
+find_int_MAX([H|T],A,B,IND,M,V):-((A=<IND,B>=IND,H>M),MAX is H;MAX is M),inc(IND,IND1),find_int_MAX(T,A,B,IND1,MAX,V).
+find_int_MAX([H|T],A,B,V):-find_int_MAX(T,A,B,1,H,V),!.
+
