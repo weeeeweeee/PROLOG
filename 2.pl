@@ -52,3 +52,9 @@ polynom(B,C,M,PR,V):-THS is 1000,count(B,C,M1),(M1 > M,(MAX is M1,NPR is B*C);MA
 
 find(V):-polynom(-999,-999,0,0,V).
 
+% 14 задание
+len([],C,V):-V is C.
+len([_|T],C,V):-inc(C,C1),len(T,C1,V).
+len([H|T],V):-len([H|T],0,V).
+
+% 
