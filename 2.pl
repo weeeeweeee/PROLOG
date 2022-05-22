@@ -109,3 +109,11 @@ interval([],_,_,CNT,CNT).
 interval([H|T],A,B,CNT,CNTR):-((A=<H,B>=H),NCNT is CNTR+1;NCNT is CNTR),interval(T,A,B,CNT,NCNT).
 interval(LIST,A,B,CNT):-interval(LIST,A,B,CNT,0),!.
 
+% 18 задание (1.16)
+second_max(LST,OUT):-find_max(LST,_),find_ind_max(LST,IND),del(LST,IND,LST1),find_max(LST1,OUT),!.
+
+find_in_interval([],_,_,_,_).
+find_in_interval([H|T],A,B,I,OUT):-(A<I,B>I),OUT is H;inc(I,I1),find_in_interval(T,A,B,I1,OUT).
+find_in_interval(LST,A,B,OUT):-(A>B,A1 is B, B1 is A;A1 is A,B1 is B),find_in_interval(LST,A1,B1,0,OUT).
+
+between_two_max(LST,OUT):-find_max(LST,MAX1),second_max(LST,MAX2),find_el(LST,MAX1,IND1),find_el(LST,MAX2,IND2),find_in_interval(LST,IND1,IND2,OUT).
