@@ -78,8 +78,6 @@ check_ind([H|T],C,M):-find_ind([H|T],C,M1),M is M1.
 % Проверить, является ли элемент по индексу N максимальным
 check_max([H|T],N):-find_max([H|T],MAX),check_ind([H|T],N,MAX).
 
-
-
 % 16 задание (1.4)
 % найти индекс максимального элемента
 find_ind_max([],_,MC,_,MC).
@@ -104,4 +102,10 @@ find_el([H|T],EL,A):-find_el([H|T],0,EL,A),!.
 % найти список индексов элементов, образующих убывающую последовательность
 sorted_ind([],_,_).
 sorted_ind([H|T],LST,[H1|T1]):-find_el(LST,H,H1),sorted_ind(T,LST,T1).
-sorted_ind(LIST,OUTPUT):-sorted(LIST,SCND),sorted_ind(SCND,LIST,OUT),len(LIST,L)!.
+sorted_ind(LIST,OUTPUT):-sorted(LIST,SCND),sorted_ind(SCND,LIST,OUTPUT),!.
+
+% 17 задание (1.14)
+interval([],_,_,CNT,CNT).
+interval([H|T],A,B,CNT,CNTR):-((A=<H,B>=H),NCNT is CNTR+1;NCNT is CNTR),interval(T,A,B,CNT,NCNT).
+interval(LIST,A,B,CNT):-interval(LIST,A,B,CNT,0),!.
+
