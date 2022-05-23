@@ -58,3 +58,21 @@ zad15:-Friends=[_,_,_],
 	not(in_list(Friends,[natasha,X2,X2])),
 	write(Friends),nl,!.
 	
+% hs - has siblings
+% ss - small
+% od - older than tokar
+
+% 16 задание
+zad16:-Friends=[_,_,_],
+	in_list(Friends,[slesar,_,_]),
+	in_list(Friends,[tokar,_,_]),
+	in_list(Friends,[svar,_,_]),
+	in_list(Friends,[_,borisov,_]),
+	in_list(Friends,[_,ivanov,_]),
+	in_list(Friends,[_,semenov,_]),
+	in_list(Friends,[slesar,_,ss]),
+	in_list(Friends,[_,borisov,hs]),
+	in_list(Friends,[_,semenov,od]),
+	not(in_list(Friends,[slesar,_,od])),
+	not(in_list(Friends,[slesar,_,hs])),
+	write(Friends),nl,!.
