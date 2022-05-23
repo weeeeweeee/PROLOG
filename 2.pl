@@ -63,7 +63,7 @@ len([H|T],V):-len([H|T],0,V).
 
 % 15 задание (1.3)
 % Найти максимальный элемент
-find_max([],M,V):-V is M.
+find_max([],V,V).
 find_max([H|T],M,V):-(H>M,MAX is H;MAX is M),find_max(T,MAX,V).
 find_max([H|T],V):-find_max(T,H,V),!.
 
@@ -123,3 +123,12 @@ find_int_MAX([],_,_,_,V,V).
 find_int_MAX([H|T],A,B,IND,M,V):-((A=<IND,B>=IND,H>M),MAX is H;MAX is M),inc(IND,IND1),find_int_MAX(T,A,B,IND1,MAX,V).
 find_int_MAX([H|T],A,B,V):-find_int_MAX(T,A,B,1,H,V),!.
 
+
+countem(V):-find_in_interval([1,2,3,4,5,6],0,5,OUT),writeln(OUT),false;V is OUT.
+
+% 20 задание (1.28)
+find_min([],V,V).
+find_min([H|T],M,V):-(H>M,M1 is M;M1 is H),find_min(T,M1,V).
+find_min([H|T],V):-find_min(T,H,V),!.
+
+between_min_max(LST,OUT):-find_max(LST,M1),find_min(LST,M2),find_el(LST,M1,I1),find_el(LST,M2,I2),find_in_interval(LST,I1,I2,OUT).
