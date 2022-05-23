@@ -39,5 +39,22 @@ zad14:-Hair = [_,_,_],
 	not(in_list(Hair,[belokurov,blondin])),
 	not(in_list(Hair,[ryzhov,ryzhiy])),
 	not(in_list(Hair,[chernov,brunet])),
-	write(Hair),nl.
+	write(Hair),nl,!.
+	
+% 15 задание
+zad15:-Friends=[_,_,_],
+	in_list(Friends,[anya,X,X]),
+	in_list(Friends,[valya,_,_]),
+	in_list(Friends,[natasha,_,green]),
+	in_list(Friends,[_,white,_]),
+	in_list(Friends,[_,green,_]),
+	in_list(Friends,[_,blue,_]),
+	in_list(Friends,[_,_,white]),
+	in_list(Friends,[_,_,green]),
+	in_list(Friends,[_,_,blue]),
+	not(in_list(Friends,[valya,white,_])),
+	not(in_list(Friends,[valya,_,white])),
+	not(in_list(Friends,[valya,X1,X1])),
+	not(in_list(Friends,[natasha,X2,X2])),
+	write(Friends),nl,!.
 	
