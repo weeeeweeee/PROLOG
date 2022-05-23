@@ -2,6 +2,10 @@ prime(X,X):- true,!.
 prime(X,Y):- X>Y, 0 is X mod Y -> false;Y1 is Y+1,prime(X,Y1).
 prime(X):- X>1,prime(X,2),!;false,!.
 
+in_list([],_):-fail.
+in_list([H|_],H).
+in_list([_|T],El):-in_list(T,El).
+
 % 11 задание (1.40)
 even([],_):-false.
 even([H|T],Out):-0 is H mod 2,Out is H;even(T,Out),!.
@@ -20,10 +24,20 @@ positive([H|T],O):-H>0,O is H;positive(T,O).
 n_and_p(LST,O):-negative(LST,O),positive(LST,O).
 
 % 13 задание (1.52)
+dividers(1,_,[]).
+dividers(N,P,[H|T]):-prime(P),0 is N mod P,N1 is N div P,H is P,dividers(N1,2,T);P1 is P+1,dividers(N,P1,[H|T]).
+dividers(N,OUT):-dividers(N,2,OUT),!.
 
-rev([],Z,Z).
-rev([H|T],Z,Acc):-rev(T,Z,[H|Acc]).
-
-dividers(1,_,L,L).
-dividers(N,P,L,OUT):-prime(P),0 is N mod P,N1 is N div P,dividers(N1,2,[P|L],OUT);P1 is P+1,dividers(N,P1,L,OUT).
-dividers(N,OUT):-dividers(N,2,[],OUT1),rev(OUT1,OUT,[]),!.
+% 14 задание
+zad14:-Hair = [_,_,_],
+	in_list(Hair,[belokurov,_]),
+	in_list(Hair,[ryzhov,_]),
+	in_list(Hair,[chernov,_]),
+	in_list(Hair,[_,blondin]),
+	in_list(Hair,[_,ryzhiy]),
+	in_list(Hair,[_,brunet]),
+	not(in_list(Hair,[belokurov,blondin])),
+	not(in_list(Hair,[ryzhov,ryzhiy])),
+	not(in_list(Hair,[chernov,brunet])),
+	write(Hair),nl.
+	
