@@ -142,3 +142,51 @@ zad19:- Friends=[_,_,_],
   not(in_list(Friends,[michael,_,_,third])),
   not(in_list(Friends,[simon,_,_,third])),
   write(Friends),nl,fail.
+  
+
+check_unique([],true).
+check_unique([[_,_,false]|T],true):-check_unique(T,true).
+check_unique([[_,_,true]|_],true):-fail.
+check_unique([[_,_,false]|T]):-check_unique(T).
+check_unique([[_,_,true]|T]):-check_unique(T,true).
+
+
+check_one([],0).
+check_one([],1).
+check_one(_,2):-fail. 
+check_one([[_,false,_]|T],N):-N1 is N+1,check_one(T,N1).
+check_one([[_,true,_]|T],N):-check_one(T,N).
+check_one([[_,false,_]|T]):-check_one(T,1).
+check_one([[_,true,_]|T]):-check_one(T,0).
+
+zad20:- Children=[_,_,_,_,_],
+	in_list(Children,[andrew,_,_]),
+	in_list(Children,[vitya,_,_]),
+	in_list(Children,[dima,_,_]),
+	in_list(Children,[yura,_,_]),	
+	in_list(Children,[kolya,true,_]),
+	in_list(Children,[_,true,_]),
+	in_list(Children,[_,false,_]),
+	in_list(Children,[_,_,false]),
+	in_list(Children,[_,_,true]),
+	(in_list(Children,[andrew,true,_])->
+		(in_list(Children,[vitya,_,true]);
+		in_list(Children,[kolya,_,true]));
+		not((in_list(Children,[vitya,_,true]);
+		in_list(Children,[kolya,_,true])))),
+	(in_list(Children,[vitya,true,_])-> (
+		in_list(Children,[vitya,_,false]),
+		in_list(Children,[yura,_,false]));
+		not((in_list(Children,[vitya,_,false]),
+		in_list(Children,[yura,_,false])))),
+	(in_list(Children,[dima, true, _])-> (
+		(in_list(Children,[andrew,true,_]),
+		in_list(Children,[vitya,false,_]));
+		(in_list(Children,[andrew,false,_]),
+		in_list(Children,[vitya,true,_])));true), 
+	(in_list(Children,[yura,true,_])->
+		in_list(Children,[dima,false,_]);
+		in_list(Children,[dima,true,_])),
+	check_one(Children),
+	check_unique(Children),
+	write(Children),nl,!.

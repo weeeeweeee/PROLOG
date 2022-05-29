@@ -11,7 +11,7 @@ notcoprime(X,Y):- not(coprime(X,Y)).
 
 % 11 задание 
 % рекурсия вверх 
-count_impl(_,1,CNT):- CNT is 0.
+count_impl(_,1,0).
 count_impl(X,Y,CNT):- Y>1, NY is Y-1, count_impl(X,NY,NCNT),(notcoprime(X,Y),even(Y),CNT is NCNT+1;CNT is NCNT),!.
 countnotprime(X,Y):-NX is X-1,count_impl(X,NX,Y).
 
