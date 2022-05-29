@@ -113,5 +113,16 @@ zad17:- Drinks=[_,_,_,_],
 	near([glass,_],[_,milk],Drinks),
 	write(Drinks),nl,fail.
 	
-
-	
+zad18:-  Gentlemen=[_,_,_,_],
+  in_list(Gentlemen,[voronov,_]),
+  in_list(Gentlemen,[pavlov,_]),
+  in_list(Gentlemen,[levick,writer]),
+  in_list(Gentlemen,[sugarov,_]),
+  in_list(Gentlemen,[_,dancer]),
+  in_list(Gentlemen,[_,artman]),
+  in_list(Gentlemen,[_,singer]),
+  not(in_list(Gentlemen,[voronov,singer])),
+  not(in_list(Gentlemen,[levick,singer])),
+  not(in_list(Gentlemen,[pavlov,artman])),
+  not(in_list(Gentlemen,[voronov,artman])),
+  write(Gentlemen),nl,fail.
