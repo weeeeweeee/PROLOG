@@ -39,7 +39,7 @@ zad14:-Hair = [_,_,_],
 	not(in_list(Hair,[belokurov,blondin])),
 	not(in_list(Hair,[ryzhov,ryzhiy])),
 	not(in_list(Hair,[chernov,brunet])),
-	write(Hair),nl,fail.
+	write(Hair),nl,!.
 	
 % 15 задание
 zad15:-Friends=[_,_,_],
@@ -56,7 +56,7 @@ zad15:-Friends=[_,_,_],
 	not(in_list(Friends,[valya,_,white])),
 	not(in_list(Friends,[valya,X1,X1])),
 	not(in_list(Friends,[natasha,X2,X2])),
-	write(Friends),nl,fail.
+	write(Friends),nl,!.
 	
 % hs - has siblings
 % ss - small
@@ -75,7 +75,7 @@ zad16:-Friends=[_,_,_],
 	in_list(Friends,[_,semenov,od]),
 	not(in_list(Friends,[slesar,_,od])),
 	not(in_list(Friends,[slesar,_,hs])),
-	write(Friends),nl,fail.
+	write(Friends),nl,!.
 	
 % 17 задание
 % B справа от A
@@ -111,7 +111,7 @@ zad17:- Drinks=[_,_,_,_],
 	right([_,lemonade],[kuvshin,_],Drinks)),
 	near([glass,_],[jar,_],Drinks),
 	near([glass,_],[_,milk],Drinks),
-	write(Drinks),nl,fail.
+	write(Drinks),nl,!.
 	
 zad18:-  Gentlemen=[_,_,_,_],
 	in_list(Gentlemen,[voronov,_]),
@@ -125,7 +125,7 @@ zad18:-  Gentlemen=[_,_,_,_],
 	not(in_list(Gentlemen,[levick,singer])),
 	not(in_list(Gentlemen,[pavlov,artman])),
 	not(in_list(Gentlemen,[voronov,artman])),
-	write(Gentlemen),nl,fail.
+	write(Gentlemen),nl,!.
 
 zad19:- Friends=[_,_,_],
   in_list(Friends,[michael,_,bb,_]),
@@ -141,7 +141,7 @@ zad19:- Friends=[_,_,_],
   not(in_list(Friends,[simon,_,tennis,_])),
   not(in_list(Friends,[michael,_,_,third])),
   not(in_list(Friends,[simon,_,_,third])),
-  write(Friends),nl,fail.
+  write(Friends),nl,!.
   
 
 check_unique([],true).
