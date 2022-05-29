@@ -39,7 +39,7 @@ zad14:-Hair = [_,_,_],
 	not(in_list(Hair,[belokurov,blondin])),
 	not(in_list(Hair,[ryzhov,ryzhiy])),
 	not(in_list(Hair,[chernov,brunet])),
-	write(Hair),nl,!.
+	write(Hair),nl,fail.
 	
 % 15 задание
 zad15:-Friends=[_,_,_],
@@ -56,7 +56,7 @@ zad15:-Friends=[_,_,_],
 	not(in_list(Friends,[valya,_,white])),
 	not(in_list(Friends,[valya,X1,X1])),
 	not(in_list(Friends,[natasha,X2,X2])),
-	write(Friends),nl,!.
+	write(Friends),nl,fail.
 	
 % hs - has siblings
 % ss - small
@@ -75,4 +75,43 @@ zad16:-Friends=[_,_,_],
 	in_list(Friends,[_,semenov,od]),
 	not(in_list(Friends,[slesar,_,od])),
 	not(in_list(Friends,[slesar,_,hs])),
-	write(Friends),nl,!.
+	write(Friends),nl,fail.
+	
+% 17 задание
+% B справа от A
+right(_,_,[_]):-fail.
+right(A,B,[A|[B|_]]).
+right(A,B,[_|List]):-right(A,B,List).
+
+% B слева от A
+left(_,_,[_]):-fail.
+left(A,B,[B|[A|_]]).
+left(A,B,[_|List]):-left(A,B,List).
+
+% B около A
+near(A,B,List):-right(A,B,List).
+near(A,B,List):-left(A,B,List).
+
+zad17:- Drinks=[_,_,_,_],
+	in_list(Drinks,[bottle,_]),
+	in_list(Drinks,[glass,_]),
+	in_list(Drinks,[kuvshin,_]),
+	in_list(Drinks,[jar,_]),
+	in_list(Drinks,[_,milk]),
+	in_list(Drinks,[_,lemonade]),
+	in_list(Drinks,[_,kvas]),
+	in_list(Drinks,[_,aqua]),
+	not(in_list(Drinks,[bottle,milk])),
+	not(in_list(Drinks,[bottle,aqua])),
+	not(in_list(Drinks,[jar,lemonade])),
+	not(in_list(Drinks,[jar,aqua])),
+	(right([kuvshin,_],[_,lemonade],Drinks),
+	right([_,lemonade],[_,kvas],Drinks);
+	right([_,kvas],[_,lemonade],Drinks),
+	right([_,lemonade],[kuvshin,_],Drinks)),
+	near([glass,_],[jar,_],Drinks),
+	near([glass,_],[_,milk],Drinks),
+	write(Drinks),nl,fail.
+	
+
+	
