@@ -255,3 +255,15 @@ task9:-tell('F:/PROLOG/9.txt'),
 	in_list_exclude([0,1,2,3,4],A1,L1),in_list_exclude(L1,A2,[A3,A4,A5]),
 	place_wo(L2,3,[S1,S2,S3]), re_place(Word,[A3,A4,A5],[S1,S2,S3]),
 	write_str(Word),fail,told.
+
+% 10 задание
+task10:-tell('F:/PROLOG/10.txt'),
+	Word=[_,_,_,_,_,_],
+	in_list_exclude([a,b,c,d,e,f],La,L1),
+	sochet([A1,A2],[0,1,2,3,4,5],2), re_place(Word,[A1,A2],[La,La]),
+	in_list_exclude([0,1,2,3,4,5],A1,Ll2),in_list_exclude(Ll2,A2,Ll3),
+	in_list_exclude(L1,Lb,L2),
+	sochet([A3,A4],Ll3,2), re_place(Word,[A3,A4],[Lb,Lb]),
+	in_list_exclude(Ll3,A3,Ll4),in_list_exclude(Ll4,A4,[P1,P2]),
+	place_wo(L2,2,[S1,S2]),re_place(Word,[P1,P2],[S1,S2]),
+	write_str(Word),fail,told.
