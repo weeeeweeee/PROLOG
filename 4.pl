@@ -220,18 +220,30 @@ combs_rep(Sub_set,[_|SetTail],K):-combs_rep(Sub_set,SetTail,K).
 task6_6(K):-read_str(S,_),tell('F:/PROLOG/6_6.txt'),combs_rep(A,S,K),write_str(A),fail,told.
 
 % 7 задание
-
 % получить элемент по индексу
 index_e(List, N, H):-index_e(List, 0, N, H).
 index_e([H|_], N, N, H):-!.
 index_e([_|T], I, N, Result):-I1 is I+1,index_e(T, I1, N, Result).
 
+% проверить, стоят ли элементы списка L2 на позициях из списка L1 в списке List
+re_place(_,[],[]).
+re_place(List,[H1|T1],[H2|T2]):-index_e(List,H1,H2),re_place(List,T1,T2).
+
 task7:-tell('F:/PROLOG/7.txt'),
 	Word=[_,_,_,_,_],
-	sochet([A1,A2],[0,1,2,3,4],2), index_e(Word,A1,a), index_e(Word,A2,a),
+	sochet([A1,A2],[0,1,2,3,4],2), re_place(Word,[A1,A2],[a,a]),
 	in_list_exclude([0,1,2,3,4],A1,L1),in_list_exclude(L1,A2,[A3,A4,A5]),
-	place_w([b,c,d,e,f],3,[S1,S2,S3]),index_e(Word,A3,S1),
-	index_e(Word,A4,S2),index_e(Word,A5,S3),
+	place_w([b,c,d,e,f],3,[S1,S2,S3]), re_place(Word,[A3,A4,A5],[S1,S2,S3]),
 	write_str(Word),fail,told.
+
+
+
 	
-	
+% 8 задание
+task8:-
+	tell('F:/PROLOG/8.txt'),
+	Word=[_,_,_,_,_],
+	sochet([A1,A2],[0,1,2,3,4],2), re_place(Word,[A1,A2],[a,a]),
+	in_list_exclude([0,1,2,3,4],A1,L1),in_list_exclude(L1,A2,[A3,A4,A5]),
+	place_wo([b,c,d,e,f],3,[S1,S2,S3]), re_place(Word,[A3,A4,A5],[S1,S2,S3]),
+	write_str(Word),fail,told.
