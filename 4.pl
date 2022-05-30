@@ -194,3 +194,10 @@ place_wo(A,N,P):-in_list_exclude(A,El,A1),N1 is N-1,place_wo(A1,N1,[El|P]).
 
 task6_3(K):-read_str(S,_),tell('F:/PROLOG/6_3.txt'),place_wo(S,K,[]),told.
 
+% 6.4 задание
+% Подмножества
+subset([],[]).
+subset([H|Subset],[H|Set]):-subset(Subset,Set).
+subset(Subset,[_|Set]):-subset(Subset,Set).
+
+task6_4:-read_str(S,_),tell('F:/PROLOG/6_4.txt'),subset(A,S),write_str(A),fail,told.
