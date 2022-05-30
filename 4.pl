@@ -64,3 +64,17 @@ put_n_times(_,0):-!.
 put_n_times([H|T],N):-N1 is N-1,put(H),put_n_times([H|T],N1).
 
 task1_4:-read_str(S,N),(N>5,(first_three(S),last_three(S)),!;put_n_times(S,N)).
+
+% 1.5 задание
+last_symb([H|[]],H).
+last_symb([_|T],V):-last_symb(T,V).
+
+el_inds([],_,_,[]).
+el_inds([H|T],H,C,[C|T2]):-C1 is C+1,el_inds(T,H,C1,T2).
+el_inds([_|T],El,C,T2):-C1 is C+1,el_inds(T,El,C1,T2).
+el_inds(List,El,Out):-el_inds(List,El,0,Out),!.
+
+prnt([]):-nl,!.
+prnt([H|T]):-write(H),write(' '),prnt(T).
+
+task1_5:-read_str(S,_),last_symb(S,M),el_inds(S,M,Out),prnt(Out),!.
