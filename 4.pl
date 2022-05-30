@@ -97,4 +97,15 @@ max_len([],_,V,V):-!.
 max_len([H|T],M,MaxStr,Out):-len(H,V),(V>M,M1 is V,M2 = H;M1 is M,M2 = MaxStr),max_len(T,M1,M2,Out).
 max_len([H|T],Out):-len(H,L),max_len(T,L,H,Out).
 
-task2_1:-see('F:/PNew/PROLOG/2_1.txt'),read_list_str(List,_),seen,max_len(List,Out),write_str(Out),!.
+task2_1:-see('F:/PROLOG/2_1.txt'),read_list_str(List,_),seen,max_len(List,Out),write_str(Out),!.
+
+% 2.2 задание
+in_list([],_):-fail.
+in_list([H|_],H).
+in_list([_|T],El):-in_list(T,El).
+
+final_check([],V,V):-!.
+final_check([H|T],N,Out):-(not(in_list(H,32)),N1 is N+1,!;N1 is N),final_check(T,N1,Out).
+final_check(List,Out):-final_check(List,0,Out).
+
+task2_2:-see('F:/PROLOG/2_2.txt'),read_list_str(List,_),seen,final_check(List,N),write(N),nl,!.
