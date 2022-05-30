@@ -109,3 +109,24 @@ final_check([H|T],N,Out):-(not(in_list(H,32)),N1 is N+1,!;N1 is N),final_check(T
 final_check(List,Out):-final_check(List,0,Out).
 
 task2_2:-see('F:/PROLOG/2_2.txt'),read_list_str(List,_),seen,final_check(List,N),write(N),nl,!.
+
+% 2.3 задание
+sum([],S,S):-!.
+sum([H|T],S,Out):-S1 is S + H,sum(T,S1,Out).
+sum(List,Sum):-sum(List,0,Sum).
+
+average(List,Out):-len(List,L),sum(List,S),Out is S div L.
+
+a_count([],V,V):-!.
+a_count([97|T],N,Out):-N1 is N+1,a_count(T,N1,Out).
+a_count([_|T],N,Out):-a_count(T,N,Out).
+a_count(List,Out):-a_count(List,0,Out),!.
+
+a_list_count([],[]):-!.
+a_list_count([H|T],[H2|T2]):-a_count(H,C),H2 is C,a_list_count(T,T2).
+
+print_greater([],_).
+print_greater([H|T],Av):-a_count(H,C),(C>Av,write_str(H);true),print_greater(T,Av).
+
+task2_3:-see('F:/PROLOG/2_3.txt'),read_list_str(List,_),seen,a_list_count(List,CntList),average(CntList,Av),print_greater(List,Av),!.
+
