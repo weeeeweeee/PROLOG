@@ -155,3 +155,9 @@ task2_5:-see('F:/PROLOG/2_5.txt'),read_list_str(List,_),seen,!,
 		 get_words(WList,Words),check_all_lines(List,Words),!.
 		 
 
+
+% 3 задание
+rev([],T,T).
+rev([H|T],Out,Acc):-rev(T,Out,[H|Acc]).
+rev(List,Out):-rev(List,Out,[]).
+
