@@ -178,4 +178,11 @@ unique_digit(X,N):-unique_digit(X,[],N),!.
 place_w(_,0,P):-write_str(P),!,fail.
 place_w(A,N,P):-in_list(A,El),N1 is N-1,place_w(A,N1,[El|P]).
 
-task6_1(K):-read_str(S,_),tell('F:/PROLOG/2_6.txt'),place_w(S,K,[]),told.
+task6_1(K):-read_str(S,_),tell('F:/PROLOG/6_1.txt'),place_w(S,K,[]),told.
+
+% 6.2 задание
+% Перестановки (permutations)
+perm([],P):-write_str(P),!,fail.
+perm(A,P):-in_list_exclude(A,El,A1),perm(A1,[El|P]).
+
+task6_2:-read_str(S,_),tell('F:/PROLOG/6_2.txt'),perm(S,[]),told.
