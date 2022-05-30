@@ -172,3 +172,10 @@ unique_digit(X,List,N):-X1 is X div 10,Tmp is X mod 10,
 					   (not(in_list(List,Tmp)),List1 = [Tmp|List];List1 = List),
 						unique_digit(X1,List1,N).
 unique_digit(X,N):-unique_digit(X,[],N),!.
+
+% 6.1 задание
+% размещения с повторениями
+place_w(_,0,P):-write_str(P),!,fail.
+place_w(A,N,P):-in_list(A,El),N1 is N-1,place_w(A,N1,[El|P]).
+
+task6_1(K):-read_str(S,_),tell('F:/PROLOG/2_6.txt'),place_w(S,K,[]),told.
