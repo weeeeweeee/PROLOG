@@ -175,28 +175,29 @@ unique_digit(X,N):-unique_digit(X,[],N),!.
 
 % 6.1 задание
 % размещения с повторениями
-place_w(_,0,P):-write_str(P),!,fail.
-place_w(A,N,P):-in_list(A,El),N1 is N-1,place_w(A,N1,[El|P]).
+place_w(_,0,S,S):-!.
+place_w(A,N,S,P):-in_list(A,El),N1 is N-1,place_w(A,N1,[El|S],P).
+place_w(A,N,P):-place_w(A,N,[],P).
 
-task6_1(K):-read_str(S,_),tell('F:/PROLOG/6_1.txt'),place_w(S,K,[]),told.
+task6_1(K):-read_str(S,_),tell('F:/PROLOG/6_1.txt'),place_w(S,K,P),write_str(P),fail,told.
 
 % 6.2 задание
 % Перестановки (permutations)
-perm([],P):-write_str(P),!,fail.
-perm(A,P):-in_list_exclude(A,El,A1),perm(A1,[El|P]).
-
-task6_2:-read_str(S,_),tell('F:/PROLOG/6_2.txt'),perm(S,[]),told.
+perm([],S,S):-!.
+perm(A,S,P):-in_list_exclude(A,El,A1),perm(A1,[El|S],P).
+perm(A,P):-perm(A,[],P).
+task6_2:-read_str(S,_),tell('F:/PROLOG/6_2.txt'),perm(S,P),write_str(P),fail,told.
 
 % 6.3 задание
 % Размещения без повторений (placement)
-place_wo(_,0,P):-write_str(P),!,fail.
-place_wo(A,N,P):-in_list_exclude(A,El,A1),N1 is N-1,place_wo(A1,N1,[El|P]).
-
-task6_3(K):-read_str(S,_),tell('F:/PROLOG/6_3.txt'),place_wo(S,K,[]),told.
+place_wo(_,0,S,S):-!.
+place_wo(A,N,S,P):-in_list_exclude(A,El,A1),N1 is N-1,place_wo(A1,N1,[El|S],P).
+place_wo(A,N,P):-place_wo(A,N,[],P).
+task6_3(K):-read_str(S,_),tell('F:/PROLOG/6_3.txt'),place_wo(S,K,P),write_str(P),fail,told.
 
 % 6.4 задание
 % Подмножества
-subset([],[]).
+subset([],[]):-!.
 subset([H|Subset],[H|Set]):-subset(Subset,Set).
 subset(Subset,[_|Set]):-subset(Subset,Set).
 
@@ -219,15 +220,18 @@ combs_rep(Sub_set,[_|SetTail],K):-combs_rep(Sub_set,SetTail,K).
 task6_6(K):-read_str(S,_),tell('F:/PROLOG/6_6.txt'),combs_rep(A,S,K),write_str(A),fail,told.
 
 % 7 задание
-write_list([]):-nl,!.
-write_list([H|T]):-write(H),write_list(T).
 
-check2a(List):-in_list_exclude(List,a,L1),in_list_exclude(L1,a,L2),not(in_list(L2,a)).
+% получить элемент по индексу
+index_e(List, N, H):-index_e(List, 0, N, H).
+index_e([H|_], N, N, H):-!.
+index_e([_|T], I, N, Result):-I1 is I+1,index_e(T, I1, N, Result).
 
-form(_,0,T):-check2a(T),write_list(T),fail;!,fail.
-form(List,N,T):-N1 is N-1,in_list(List,E),form(List,N1,[E|T]).
-
-task7:-tell('F:/PROLOG/7.txt'),form([a,b,c,d,e,f],5,[]),told,!.
-
-
+task7:-tell('F:/PROLOG/7.txt'),
+	Word=[_,_,_,_,_],
+	sochet([A1,A2],[0,1,2,3,4],2), index_e(Word,A1,a), index_e(Word,A2,a),
+	in_list_exclude([0,1,2,3,4],A1,L1),in_list_exclude(L1,A2,[A3,A4,A5]),
+	place_w([b,c,d,e,f],3,[S1,S2,S3]),index_e(Word,A3,S1),
+	index_e(Word,A4,S2),index_e(Word,A5,S3),
+	write_str(Word),fail,told.
+	
 	
