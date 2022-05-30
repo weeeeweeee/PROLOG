@@ -186,3 +186,11 @@ perm([],P):-write_str(P),!,fail.
 perm(A,P):-in_list_exclude(A,El,A1),perm(A1,[El|P]).
 
 task6_2:-read_str(S,_),tell('F:/PROLOG/6_2.txt'),perm(S,[]),told.
+
+% 6.3 задание
+% Размещения без повторений (placement)
+place_wo(_,0,P):-write_str(P),!,fail.
+place_wo(A,N,P):-in_list_exclude(A,El,A1),N1 is N-1,place_wo(A1,N1,[El|P]).
+
+task6_3(K):-read_str(S,_),tell('F:/PROLOG/6_3.txt'),place_wo(S,K,[]),told.
+
