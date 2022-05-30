@@ -156,12 +156,19 @@ task2_5:-see('F:/PROLOG/2_5.txt'),read_list_str(List,_),seen,!,
 		 
 
 
-% 3 задание
+% 3 задание (4)
 rev([],T,T).
 rev([H|T],Out,Acc):-rev(T,Out,[H|Acc]).
 rev(List,Out):-rev(List,Out,[]).
 
 check_pal(List):-rev(List,Tsil),List=Tsil.
 
-% 4 задание
+% 4 задание (11)
 pred:-read_str(S,_),count_words(S,N),write(N),nl,!.
+
+% 5 задание (15)
+unique_digit(0,List,N):-len(List,N).
+unique_digit(X,List,N):-X1 is X div 10,Tmp is X mod 10,
+					   (not(in_list(List,Tmp)),List1 = [Tmp|List];List1 = List),
+						unique_digit(X1,List1,N).
+unique_digit(X,N):-unique_digit(X,[],N),!.
