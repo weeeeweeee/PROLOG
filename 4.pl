@@ -49,3 +49,18 @@ find_max([[H1,H2]|T],Max,Item,Out):-(Max < H2,Max1 is H2,Item1 = H1;Max1 is Max,
 find_max([[H1,H2]|T],Out):-find_max(T,H2,H1,Out),!.
 
 task1_3:-read_str(S,_),get_words(S,S1),count_list(S1,Out),find_max(Out,MAX),write_str(MAX).
+
+% 1.4 задание
+len([],C,V):-V is C.
+len([_|T],C,V):-C1 is C+1,len(T,C1,V).
+len([H|T],V):-len([H|T],0,V).
+
+first_three([H1,H2,H3|_]):-put(H1),put(H2),put(H3),nl,!.
+
+last_three([H1,H2,H3|[]]):-put(H1),put(H2),put(H3),nl,!.
+last_three([_|T]):-last_three(T).
+
+put_n_times(_,0):-!.
+put_n_times([H|T],N):-N1 is N-1,put(H),put_n_times([H|T],N1).
+
+task1_4:-read_str(S,N),(N>5,(first_three(S),last_three(S)),!;put_n_times(S,N)).
