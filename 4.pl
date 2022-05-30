@@ -201,3 +201,11 @@ subset([H|Subset],[H|Set]):-subset(Subset,Set).
 subset(Subset,[_|Set]):-subset(Subset,Set).
 
 task6_4:-read_str(S,_),tell('F:/PROLOG/6_4.txt'),subset(A,S),write_str(A),fail,told.
+
+% 6.5 задание
+% Сочетания
+sochet([],_,0):-!.
+sochet([H|Subset],[H|Set],K):-K1 is K-1,sochet(Subset,Set,K1).
+sochet(Subset,[_|Set],K):-sochet(Subset,Set,K).
+
+task6_5(K):-read_str(S,_),tell('F:/PROLOG/6_5.txt'),sochet(A,S,K),write_str(A),fail,told.
