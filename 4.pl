@@ -209,3 +209,11 @@ sochet([H|Subset],[H|Set],K):-K1 is K-1,sochet(Subset,Set,K1).
 sochet(Subset,[_|Set],K):-sochet(Subset,Set,K).
 
 task6_5(K):-read_str(S,_),tell('F:/PROLOG/6_5.txt'),sochet(A,S,K),write_str(A),fail,told.
+
+% 6.6 задание
+% Сочетания с повторениями
+combs_rep([],_,0):-!.
+combs_rep([H|Sub_set],[H|SetTail],K):-K1 is K-1,combs_rep(Sub_set,[H|SetTail],K1).
+combs_rep(Sub_set,[_|SetTail],K):-combs_rep(Sub_set,SetTail,K).
+
+task6_6(K):-read_str(S,_),tell('F:/PROLOG/6_6.txt'),combs_rep(A,S,K),write_str(A),fail,told.
