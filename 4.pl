@@ -217,3 +217,17 @@ combs_rep([H|Sub_set],[H|SetTail],K):-K1 is K-1,combs_rep(Sub_set,[H|SetTail],K1
 combs_rep(Sub_set,[_|SetTail],K):-combs_rep(Sub_set,SetTail,K).
 
 task6_6(K):-read_str(S,_),tell('F:/PROLOG/6_6.txt'),combs_rep(A,S,K),write_str(A),fail,told.
+
+% 7 задание
+write_list([]):-nl,!.
+write_list([H|T]):-write(H),write_list(T).
+
+check2a(List):-in_list_exclude(List,a,L1),in_list_exclude(L1,a,L2),not(in_list(L2,a)).
+
+form(_,0,T):-check2a(T),write_list(T),fail;!,fail.
+form(List,N,T):-N1 is N-1,in_list(List,E),form(List,N1,[E|T]).
+
+task7:-tell('F:/PROLOG/7.txt'),form([a,b,c,d,e,f],5,[]),told,!.
+
+
+	
