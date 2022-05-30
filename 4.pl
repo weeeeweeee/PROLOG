@@ -78,3 +78,23 @@ prnt([]):-nl,!.
 prnt([H|T]):-write(H),write(' '),prnt(T).
 
 task1_5:-read_str(S,_),last_symb(S,M),el_inds(S,M,Out),prnt(Out),!.
+
+
+% 2.1 задание
+
+read_str_f(A,N,Flag):-get0(X),r_str_f(X,A,[],N,0,Flag).
+r_str_f(-1,A,A,N,N,0):-!.
+r_str_f(10,A,A,N,N,1):-!.
+r_str_f(X,A,B,N,K,Flag):-K1 is K+1,append(B,[X],B1),get0(X1),r_str_f(X1,A,B1,N,K1,Flag).
+
+read_list_str(List,List_len):-read_str_f(A,N,Flag),r_l_s(List,List_len,[A],[N],Flag).
+r_l_s(List,List_len,List,List_len,0):-!.
+r_l_s(List,List_len,Cur_list,Cur_list_len,_):-
+	read_str_f(A,N,Flag),append(Cur_list,[A],C_l),append(Cur_list_len,[N],C_l_l),
+	r_l_s(List,List_len,C_l,C_l_l,Flag).
+	
+max_len([],_,V,V):-!.
+max_len([H|T],M,MaxStr,Out):-len(H,V),(V>M,M1 is V,M2 = H;M1 is M,M2 = MaxStr),max_len(T,M1,M2,Out).
+max_len([H|T],Out):-len(H,L),max_len(T,L,H,Out).
+
+task2_1:-see('F:/PNew/PROLOG/2_1.txt'),read_list_str(List,_),seen,max_len(List,Out),write_str(Out),!.
