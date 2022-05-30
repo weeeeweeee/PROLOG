@@ -163,3 +163,5 @@ rev(List,Out):-rev(List,Out,[]).
 
 check_pal(List):-rev(List,Tsil),List=Tsil.
 
+% 4 задание
+pred:-read_str(S,_),count_words(S,N),write(N),nl,!.
