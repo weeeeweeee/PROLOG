@@ -130,3 +130,13 @@ print_greater([H|T],Av):-a_count(H,C),(C>Av,write_str(H);true),print_greater(T,A
 
 task2_3:-see('F:/PROLOG/2_3.txt'),read_list_str(List,_),seen,a_list_count(List,CntList),average(CntList,Av),print_greater(List,Av),!.
 
+% 2.4 задание
+read_all_str(S,N):-get0(X),r_a_str(S,N,0,[],X).
+r_a_str(S,N,N,S,-1):-!.
+r_a_str(S,N,K,TS,10):-NewK is K,append(TS,[32],NewTS),get0(NewX),r_a_str(S,N,NewK,NewTS,NewX).
+r_a_str(S,N,K,TS,X):-NewK is K + 1,append(TS,[X],NewTS),get0(NewX),r_a_str(S,N,NewK,NewTS,NewX).
+
+
+task2_4:-see('F:/PROLOG/2_4.txt'),read_all_str(S,_),seen,get_words(S,S1),count_list(S1,Out),find_max(Out,MAX),write_str(MAX),!.
+
+
