@@ -161,3 +161,5 @@ rev([],T,T).
 rev([H|T],Out,Acc):-rev(T,Out,[H|Acc]).
 rev(List,Out):-rev(List,Out,[]).
 
+check_pal(List):-rev(List,Tsil),List=Tsil.
+
